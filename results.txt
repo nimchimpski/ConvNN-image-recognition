@@ -1,15 +1,29 @@
-try K-fold validation.
+
+For this data and input sizes I noted the following:
+
+-the number of filters greatly increases the training time.
+-results were best with an increase in filters, kernel size and pooling size  per layer
+-pooling can reduces output size too much.
+-bigger strides, anywhere = bigger loss
+-the opposite to the ConvNN layers was true for hidden layer size. Here decreasing the size moving forward was beneficial.
+-more than 1 deep layer had a negative impact.
+-if that layer was too big (>256) there was no gain
+
+Tahn activation on the first layer showed a small improvement. 
+
+The overall feeling was a minimizing of complexity was best.
+
+On the graphs a convergence of training and validation accuracy and loss at good levels (~100 and 0 respectively), followed by a stable/horizontal line seemed to imply there was sufficient training, and (maybe?) minimal underfitting and overfitting. 
+
+Further tests  did show road painted stop letters categorised as a stop sign, suggesting good generalisation, but problematic lack of context (ie. correctly identifying the letters but not realising they are in the wrong place)
+
+Final model had:
+
+2dconv: 32 filters , 3x3 kernels, 2x2 pooling
+2dconv: 128 filters, 5x5 kernels, 3x3 pooling
+hidden: 256 units 
+dropout: 0.5
 
 
-pooling can reduces out put size to much.
-
-validation accuracy=100% with silly complicated one. then not! then  100
-
-bigger strides, anywhere = bigger loss
 
 
-
-TODO
-sync working kerasmod
-install my package
-freeze to requirements 
