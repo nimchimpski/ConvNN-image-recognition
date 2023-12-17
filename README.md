@@ -12,3 +12,8 @@ A combined PIL image will be made of:
 -3d layered representation of the model
 
 ...and stored in a 'results' directory.
+
+The 3d visualisation package can be installed with pip:
+pip install git+https://github.com/nimchimpski@visualkeras_mod
+
+Original version at https://github.com/paulgavrikov/visualkeras

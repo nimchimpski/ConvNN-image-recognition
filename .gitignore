@@ -4,7 +4,6 @@ gtsrb-small/
 venv/
 venv3/
 venvold/
-results.txt
 test.py
 gtsrb.zip
 __pycache__/

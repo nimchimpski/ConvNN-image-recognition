@@ -1,0 +1,15 @@
+try K-fold validation.
+
+
+pooling can reduces out put size to much.
+
+validation accuracy=100% with silly complicated one. then not! then  100
+
+bigger strides, anywhere = bigger loss
+
+
+
+TODO
+sync working kerasmod
+install my package
+freeze to requirements 

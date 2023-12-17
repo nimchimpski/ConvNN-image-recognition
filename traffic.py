@@ -98,8 +98,10 @@ def main():
     #       Evaluate neural network performance
     print(f"---evaluating model---")
     loss, accuracy = model.evaluate(x_test,  y_test, verbose=2)
-
-    #       create chart
+    '''
+           create charts with plot()
+    '''
+   
     chartpath = plot(history, totaltime, loss, accuracy)
 
     #       Save model to file
@@ -113,12 +115,17 @@ def main():
     fontpath = os.path.join('System','Library','Fonts','HelveticaNeue.ttc')
     font = ImageFont.truetype(fontpath, 20)
     # print(f"---font type---{type(font)}")
+
+    '''
+         draw 3d layered view with  visualkeras_mod
+    '''
     # color_map = {tf.keras.layers.Conv2D: {'fill': '#ff0000', 'outline': 'black'},tf.keras.layers.Dense: {'fill': '#00ff00', 'outline': 'black'},tf.keras.layers.Dropout: {'fill': '#0000ff', 'outline': 'black'},tf.keras.layers.MaxPooling2D: {'fill': '#ffff00', 'outline': 'black'},tf.keras.layers.Flatten: {'fill': 'khaki', 'outline': 'black'}}
     color_map = {tf.keras.layers.Conv2D: {'fill': '#FF0000', 'outline': 'black'}, tf.keras.layers.MaxPooling2D: {'fill': 'lightgray', 'outline': 'black'}, tf.keras.layers.Flatten: {'fill': 'white', 'outline': 'black'}, tf.keras.layers.Dropout: {'fill': 'darkgray', 'outline': 'black'}, tf.keras.layers.Dense: {'fill': 'blue', 'outline': 'black'}}
 
     # print(f'---Conv2D color={color_map[tf.keras.layers.Conv2D]}')
 
-    #     draw and show visualkeras_mod
+    if not os.path.exists('plots'):
+        os.makedirs('plots')
     layeredpath = os.path.join('plots', f'layered-{filetime}.png')
     visualkeras_mod.layered_view(model,legend=True, color_map=color_map, font=font,  shade_step = 50, spacing=50, one_dim_orientation='x', to_file=layeredpath)
 
@@ -130,8 +137,8 @@ def main():
         # model.summary(print_fn=lambda x: f.write(x + '\n'))
 
     #     draw and save model flow
-    flow_path = os.path.join('results', f'flow-{filetime}.png')
-    plot_model(model, to_file=flow_path , show_shapes=True, show_layer_names=True)
+    # flow_path = os.path.join('results', f'flow-{filetime}.png')
+    # plot_model(model, to_file=flow_path , show_shapes=True, show_layer_names=True)
 
     combine_images(chartpath, layeredpath)
     
@@ -231,10 +238,12 @@ def plot(history, totaltime, loss, accuracy):
     # plt.show()
     
     chartname = f"{sys.argv[1]}_{filetime}.png"
-    plt.savefig(f'plots/{chartname}')
+    if not os.path.exists('plots'):
+        os.makedirs('plots')
+    chartnamepath = os.path.join('plots', chartname)
+    plt.savefig(chartnamepath)
     # plt.show()
-    chartpath = os.path.join('plots', chartname)
-    return chartpath
+    return chartnamepath
 
 def combine_images(image1, image2):
    
@@ -258,6 +267,8 @@ def combine_images(image1, image2):
 
     # Save the combined image
     results_path = os.path.join('results', f'results_{filetime}.png')
+    if not os.path.exists('results'):
+        os.makedirs('results')
     combined_image.save(results_path)
 
 
